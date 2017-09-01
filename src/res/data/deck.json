@@ -40,9 +40,13 @@
                 }
             ],
             "translations": [
-                "I come from ... ."
+                "I come from ... .",
+                "I am from ... .",
+                "This is some very long test sentence to see how it is handled. I hope it is going to work or not."
             ],
-            "hint": [ ]
+            "hints": [
+                "Here is some hint to make you remember this card better."
+            ]
         }
     ]
 }

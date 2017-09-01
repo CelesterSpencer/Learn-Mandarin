@@ -34,8 +34,8 @@ const styles = {
         justifyContent: 'center'
     },
     phoneCaseStyle: {
-        width: 400*1.5+'px',
-        height: 767*1.5+'px',
+        width: 400*1+'px',
+        height: 767*1+'px',
         padding: '1%',
         borderRadius: '30px',
         background: 'black'
@@ -53,7 +53,7 @@ const styles = {
     screenStyle: {
         width: '94%',
         height: '80%',
-        background: 'red',
+        background: 'radial-gradient(lightblue, cornflowerblue)',
         marginLeft: 'auto',
         marginRight: 'auto',
     },
