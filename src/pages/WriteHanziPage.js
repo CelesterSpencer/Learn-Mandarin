@@ -1,55 +1,56 @@
 import React, {Component} from 'react';
-import HanziWriter from 'hanzi-writer';
-import allStrokeData from '../res/data/all.json';
+import TextField from '../components/TextField';
+import CharacterComp from '../components/CharacterComp';
+import HanziWriterComp from '../components/HanziWriterComp';
+import SquareComp from '../components/SquareComp';
+import deck from './../res/data/deck.json';
 
 class WriteHanziPage extends Component {
     render() {
-        const {containerStyle} = styles;
+        const {
+            containerStyle,
+            pinyinStyle,
+            translationCompsStyle
+        } = styles;
+
+        const {characters, translations, hints} = deck.cards[0];
+        const characterComps = characters.map((character, i) =>
+            <CharacterComp key={i} character={character} hideHanzi={true} />
+        );
+        const translation = translations[0];
 
         return (
-            <div style={containerStyle} id='writerCanvas'>
-
+            <div style={containerStyle}>
+                <div style={pinyinStyle}>
+                    {characterComps}
+                </div>
+                <div style={translationCompsStyle}>
+                    <TextField key={1} text={translation} />
+                </div>
+                <SquareComp>
+                    <HanziWriterComp />
+                </SquareComp>
             </div>
         )
-    }
-    componentDidMount() {
-        let writerCanvas = document.getElementById('writerCanvas');
-        let writer = new HanziWriter(writerCanvas, '我', {
-            charDataLoader: function(char) {
-                return allStrokeData[char];
-            },
-            showOutline: true,
-            showCharacter: true,
-            width: 200,
-            height: 200,
-            padding: 20,
-            strokeAnimationDuration: 300,
-            delayBetweenStrokes: 1000,
-            strokeColor: '#555',
-            highlightColor: '#AAF',
-            outlineColor: '#DDD', 
-            drawingColor: '#333',
-            showHintAfterMisses: 3,
-            highlightOnComplete: true
-        });
-
-        // callbacks
-        writer.animateCharacter({
-            onComplete: function() { console.log('finished animating!'); }
-        });
-          
-        // quiz the user on this character
-        writer.quiz({
-            onCorrectStroke: function(status) { console.log('got a stroke correct! :)', status); },
-            onMistake: function(status) { console.log('Oh no, you made a mistake drawing the stroke :(', status); },
-            onComplete: function(status) { console.log('Yay you finished the whole character! :D', status); }
-        });
     }
 };
 
 const styles = {
     containerStyle: {
-        height: '100%'
+        height: 'calc(100% - 20px)',
+        padding: '10px',
+        display: 'flex',
+        flexDirection: 'column',
+        background: 'gray'
+    },
+    pinyinStyle: {
+        textAlign: 'center'
+    },
+    translationCompsStyle: {
+
+    },
+    writerCompStyle: {
+        flex: 1
     }
 };
 

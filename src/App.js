@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PhoneMockup from './components/PhoneMockup';
-import CardTest from './components/CardTest';
+import HeaderBar from './components/HeaderBar';
+import CardTest from './pages/CardTest';
 import WriteHanziPage from './pages/WriteHanziPage';
-import './App.css';
 
 class App extends Component {
   render() {
     return (
       <PhoneMockup>
+        <HeaderBar />
         <WriteHanziPage />
       </PhoneMockup>
     );

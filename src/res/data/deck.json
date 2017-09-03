@@ -6,37 +6,44 @@
                 {
                     "hanzi": "我",
                     "pinyin": "wo",
-                    "tone": 3
+                    "tone": 3,
+                    "isChar": true
                 },
                 {
                     "hanzi": "是",
                     "pinyin": "shi",
-                    "tone": 4
+                    "tone": 4,
+                    "isChar": true
                 },
                 {
                     "hanzi": "从",
                     "pinyin": "cong",
-                    "tone": 2
+                    "tone": 2,
+                    "isChar": true
                 },
                 {
                     "hanzi": "...",
                     "pinyin": "...",
-                    "tone": 5
+                    "tone": 5,
+                    "isChar": false
                 },
                 {
                     "hanzi": "來",
                     "pinyin": "lai",
-                    "tone": 2
+                    "tone": 2,
+                    "isChar": true
                 },
                 {
                     "hanzi": "的",
                     "pinyin": "de",
-                    "tone": 5
+                    "tone": 5,
+                    "isChar": true
                 },
                 {
                     "hanzi": ".",
                     "pinyin": ".",
-                    "tone": 5
+                    "tone": 5,
+                    "isChar": false
                 }
             ],
             "translations": [

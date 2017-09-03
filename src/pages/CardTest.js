@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import CharacterComp from './CharacterComp';
-import TranslationComp from './TranslationComp';
+import CharacterComp from '../components/CharacterComp';
+import TextField from '../components/TextField';
 import deck from './../res/data/deck.json';
 
 class CardTest extends Component {
@@ -18,7 +18,7 @@ class CardTest extends Component {
             <CharacterComp key={i} character={character} />
         );
         const translationComps = translations.map((translation, i) =>
-            <TranslationComp key={i} idx={i} translation={translation} />
+            <TextField key={i} text={translation} />
         );
         const hintComps = hints.map((hint, i) =>
             <div key={i}>{hint}</div>

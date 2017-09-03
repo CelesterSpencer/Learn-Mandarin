@@ -56,6 +56,7 @@ const styles = {
         background: 'radial-gradient(lightblue, cornflowerblue)',
         marginLeft: 'auto',
         marginRight: 'auto',
+        overflow: 'hidden'
     },
     buttonStyle: {
         width: '14%',

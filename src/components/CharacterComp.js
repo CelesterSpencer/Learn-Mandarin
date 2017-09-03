@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Themes from './../core/themes.json';
+import Themes from '../res/data/themes.json';
 
 const cardTheme = Themes.cards.default;
 const vocalMap = {
@@ -58,6 +58,15 @@ class Card extends Component {
         }
         return wordWithTones;
     }
+
+    renderPart(text, style, shouldRender) {
+        if(shouldRender) return (
+            <div style={style}>
+                {text}
+            </div>
+        )
+    }
+
     render() {
         let character = this.props.character;
         let top = character.hanzi;
@@ -70,21 +79,19 @@ class Card extends Component {
             pinyinStyle
         } = styles;
 
-        const topStyle = Object.assign(hanziStyle, {
-            background: color.hanzi
-        });
-        const bottomStyle = Object.assign(pinyinStyle, {
-            background: color.pinyin
-        });
+        let topStyle    = hanziStyle;
+        let bottomStyle = pinyinStyle;
+        topStyle.background    = color.hanzi;
+        bottomStyle.background = color.pinyin;
+        if(!this.hideHanzi || !this.hidePinyin) {
+            topStyle.borderRadius    = '5px';
+            bottomStyle.borderRadius = '5px';
+        }
 
         return (
             <div style={characterStyle}>
-                <div style={topStyle}>
-                    {top}
-                </div>
-                <div style={bottomStyle}>
-                    {bottom}
-                </div>
+                {this.renderPart(top, topStyle, !this.props.hideHanzi)}
+                {this.renderPart(bottom, bottomStyle, !this.props.hidePinyin)}
             </div>
         )
     }
