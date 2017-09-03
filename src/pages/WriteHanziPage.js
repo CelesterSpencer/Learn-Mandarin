@@ -40,8 +40,7 @@ const styles = {
         height: 'calc(100% - 20px)',
         padding: '10px',
         display: 'flex',
-        flexDirection: 'column',
-        background: 'gray'
+        flexDirection: 'column'
     },
     pinyinStyle: {
         textAlign: 'center'
