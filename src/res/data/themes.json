@@ -1,7 +1,7 @@
 {
     "cards": {
         "default": {
-            "fillBlock": true,
+            "fill": true,
             "tone1": {
                 "hanzi": "#C0392B",
                 "pinyin": "#E74C3C"

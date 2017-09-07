@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
+import {Provider} from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import reducers from './reducers';
 import PhoneMockup from './components/PhoneMockup';
 import HeaderBar from './components/HeaderBar';
-import CardTest from './pages/CardTest';
-import WriteHanziPage from './pages/WriteHanziPage';
+import WriteHanziLecture from './views/lectures/WriteHanziLecture';
 
 class App extends Component {
   render() {
     const {contentStyle} = styles;
 
+    const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+
     return (
-      <PhoneMockup>
-        <HeaderBar />
-        <div style={contentStyle}>
-          <WriteHanziPage />
-        </div>
-      </PhoneMockup>
+      <Provider store={store}>
+        <PhoneMockup>
+          <HeaderBar />
+          <div style={contentStyle}>
+            <WriteHanziLecture />
+          </div>
+        </PhoneMockup>
+      </Provider>
     );
   }
 }

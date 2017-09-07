@@ -9,26 +9,23 @@ class HanziWriterComp extends Component {
         this.writer = null;
     }
 
-    render() {
-        const {
-            containerStyle,
-            writerCanvasStyle
-        } = styles;
-
-        if(this.writer) this.writer.setCharacter(this.character.pinyin);
-
-        return (
-            <div style={containerStyle}>
-                <div id='writerCanvas' style={writerCanvasStyle}></div>
-            </div>
-        )
+    handleRightStroke(status) {
+        if(this.props.onRight) this.props.onRight(status);
     }
-
-    componentDidMount() {
+    handleWrongStroke(status) {
+        if(this.props.onWrong) this.props.onWrong(status);
+    }
+    handleCharacterComplete(status) {
+        const self = this;
+        const completed = function() { self.props.onComplete(status) };
+        if(this.props.onComplete) setTimeout(completed, 1000);
+    }
+    initWriter(hanzi) {
         let writerCanvas = document.getElementById('writerCanvas');
+        writerCanvas.innerHTML = '';
         const shorterSide = writerCanvas.clientWidth;
         
-        this.writer = new HanziWriter(writerCanvas, '我', {
+        this.writer = new HanziWriter(writerCanvas, hanzi, {
             charDataLoader: function(char) {
                 return allStrokeData[char];
             },
@@ -50,12 +47,33 @@ class HanziWriterComp extends Component {
         this.writer.animateCharacter({
             onComplete: function() { console.log('finished animating!'); }
         });
-        // quiz the user on this character
+        //quiz the user on this character
         this.writer.quiz({
-            onCorrectStroke: function(status) { console.log('got a stroke correct! :)', status); },
-            onMistake: function(status) { console.log('Oh no, you made a mistake drawing the stroke :(', status); },
-            onComplete: function(status) { console.log('Yay you finished the whole character! :D', status); }
+            onCorrectStroke: this.handleRightStroke.bind(this),
+            onMistake: this.handleWrongStroke.bind(this),
+            onComplete: this.handleCharacterComplete.bind(this)
         });
+    }
+
+    render() {
+        const {
+            containerStyle,
+            writerCanvasStyle
+        } = styles;
+
+        const {hanzi} = this.props.character;
+        if(this.writer) this.initWriter(hanzi);
+
+        return (
+            <div style={containerStyle}>
+                <div id='writerCanvas' style={writerCanvasStyle}></div>
+            </div>
+        )
+    }
+
+    componentDidMount() {
+        const {hanzi} = this.props.character;
+        this.initWriter(hanzi);
     }
 }
 
@@ -63,11 +81,9 @@ const styles = {
     containerStyle: {
         width: '100%',
         height: '100%',
-        border: '2px solid gray',
         background: 'url('+hanziGridImage+')',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
-
     },
     writerCanvasStyle: {
         width: '100%',

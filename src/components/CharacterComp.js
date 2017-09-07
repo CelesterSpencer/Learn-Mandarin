@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Themes from '../res/data/themes.json';
 
 const cardTheme = Themes.cards.default;
+
 const vocalMap = {
     "a": { priority: 1, tone: { "1": "ā", "2": "á", "3": "ǎ", "4": "à", "5": "a" }},
     "e": { priority: 2, tone: { "1": "ē", "2": "é", "3": "ě", "4": "è", "5": "e" }},
@@ -58,6 +59,40 @@ class Card extends Component {
         }
         return wordWithTones;
     }
+    calcStyles(character, hanziStyle, pinyinStyle, useOnlyOnePart) {
+        let topStyle    = hanziStyle;
+        let bottomStyle = pinyinStyle;
+
+        const color = this.getToneColor(character.tone);
+        const fill  = cardTheme.fill;
+
+        if(fill) {
+            topStyle.background    = color.hanzi;
+            bottomStyle.background = color.pinyin;
+        } else {
+            topStyle.background    = "none";
+            bottomStyle.background = "none";
+            topStyle.color    = color.hanzi;
+            bottomStyle.color = color.pinyin;
+            topStyle.border   = "1px solid " + color.hanzi;
+            bottomStyle.border= "1px solid " + color.pinyin;
+        }
+        
+        if(useOnlyOnePart) {
+            topStyle.borderRadius    = '5px';
+            bottomStyle.borderRadius = '5px';
+        } else {
+            topStyle.borderBottomLeftRadius = '0px';
+            topStyle.borderBottomRightRadius = '0px';
+            bottomStyle.borderTopRightRadius = '0px';
+            bottomStyle.borderTopLeftRadius = '0px';
+        }
+
+        return {
+            hanzi: topStyle,
+            pinyin: bottomStyle
+        }
+    }
 
     renderPart(text, style, shouldRender) {
         if(shouldRender) return (
@@ -68,10 +103,9 @@ class Card extends Component {
     }
 
     render() {
-        let character = this.props.character;
-        let top = character.hanzi;
-        let bottom = this.makeTonemarks(character.pinyin, character.tone);
-        const color = this.getToneColor(character.tone);
+        const character  = this.props.character;
+        const hideHanzi  = this.props.hideHanzi  || false;
+        const hidePinyin = this.props.hidePinyin || false;
 
         const {
             characterStyle,
@@ -79,19 +113,15 @@ class Card extends Component {
             pinyinStyle
         } = styles;
 
-        let topStyle    = hanziStyle;
-        let bottomStyle = pinyinStyle;
-        topStyle.background    = color.hanzi;
-        bottomStyle.background = color.pinyin;
-        if(!this.hideHanzi || !this.hidePinyin) {
-            topStyle.borderRadius    = '5px';
-            bottomStyle.borderRadius = '5px';
-        }
+        const top = character.hanzi;
+        const bottom = this.makeTonemarks(character.pinyin, character.tone);
+        const useOnlyOnePart = hideHanzi || hidePinyin;
+        const charStyles = this.calcStyles(character, hanziStyle, pinyinStyle, useOnlyOnePart);
 
         return (
             <div style={characterStyle}>
-                {this.renderPart(top, topStyle, !this.props.hideHanzi)}
-                {this.renderPart(bottom, bottomStyle, !this.props.hidePinyin)}
+                {this.renderPart(top, charStyles.hanzi, !hideHanzi)}
+                {this.renderPart(bottom, charStyles.pinyin, !hidePinyin)}
             </div>
         )
     }

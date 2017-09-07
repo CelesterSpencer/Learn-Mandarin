@@ -1,0 +1,1 @@
+export const SET_CHARACTER_INDEX = 'set_character_index';
