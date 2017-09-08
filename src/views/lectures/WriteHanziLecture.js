@@ -5,6 +5,7 @@ import WordComp from '../../components/WordComp';
 import CharacterComp from '../../components/CharacterComp';
 import HanziWriterComp from '../../components/HanziWriterComp';
 import SquareComp from '../../components/SquareComp';
+import ButtonComp from '../../components/ButtonComp';
 import {setCurrentCharacterIndex} from '../../actions';
 import deck from '../../res/data/deck.json';
 
@@ -41,6 +42,9 @@ class WriteHanziPage extends Component {
                     <SquareComp>
                         <HanziWriterComp character={currentCharacter} onComplete={this.handleCharacterComplete.bind(this)} />
                     </SquareComp>
+                </CardComp>
+                <CardComp>
+                    <ButtonComp onClick={() => alert('pressed')}>Press me</ButtonComp>
                 </CardComp>
             </div>
         )
