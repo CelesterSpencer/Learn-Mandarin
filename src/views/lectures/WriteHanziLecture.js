@@ -11,6 +11,7 @@ import deck from '../../res/data/deck.json';
 
 class WriteHanziPage extends Component {
     handleCharacterComplete() {
+        let i = this.props.characterIndex+1;
         this.props.setCurrentCharacterIndex(this.props.characterIndex+1);
     }
 
@@ -43,8 +44,9 @@ class WriteHanziPage extends Component {
                         <HanziWriterComp character={currentCharacter} onComplete={this.handleCharacterComplete.bind(this)} />
                     </SquareComp>
                 </CardComp>
+                <div style={{flex: 1}}></div>
                 <CardComp>
-                    <ButtonComp onClick={() => alert('pressed')}>Press me</ButtonComp>
+                    <ButtonComp onClick={() => alert('pressed')} disabled={true}>Next</ButtonComp>
                 </CardComp>
             </div>
         )

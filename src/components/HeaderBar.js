@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import appIcon from '../res/images/app-icon.png';
+import appIcon from '../res/images/dragon_small.svg';
 import settingsIcon from '../res/images/settings.svg';
 
 class HeaderBar extends Component {
@@ -27,7 +27,7 @@ const styles = {
     containerStyle: {
         width: '100%',
         height: '50px',
-        background: 'steelblue',
+        background: '#C00000',
         boxShadow: '0px 5px 5px -3px black',
         display: 'flex',
         flexDirection: 'row',
