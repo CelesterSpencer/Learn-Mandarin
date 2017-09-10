@@ -28,13 +28,11 @@ const styles = {
         width: '100%',
         height: '50px',
         background: '#C00000',
-        boxShadow: '0px 5px 5px -3px black',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        zIndex: 2,
-        position: 'relative'
+        borderBottom: '1px solid black'
     },
     appInfoStyle: {
         verticalAlign: 'middle',

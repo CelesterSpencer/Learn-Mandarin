@@ -11,7 +11,6 @@ import deck from '../../res/data/deck.json';
 
 class WriteHanziPage extends Component {
     handleCharacterComplete() {
-        let i = this.props.characterIndex+1;
         this.props.setCurrentCharacterIndex(this.props.characterIndex+1);
     }
 

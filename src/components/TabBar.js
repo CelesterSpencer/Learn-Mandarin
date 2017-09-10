@@ -16,11 +16,14 @@ class TabBar extends Component {
         const {containerStyle, tabActiveStyle, tabInactiveStyle, iconStyle} = styles;
 
         const tabs = this.props.tabs.map((tab,i) => {
+            const iconDimensions = tab.dimensions || iconStyle;
+
             return(
                 <div
+                    key={'tabBar'+i}
                     onClick={this.handlePress.bind(this, tab, i)} 
                     style={(tab.label === this.state.activeTab)?tabActiveStyle:tabInactiveStyle}>
-                    <img src={tab.icon} alt="" style={iconStyle} />
+                    <img src={tab.icon} alt="" style={iconDimensions} />
                 </div>
             );
         });
@@ -31,6 +34,9 @@ class TabBar extends Component {
             </div>
         );
     }
+    componentDidMount() {
+        this.props.onTabChange(this.props.defaultTab, null);
+    }
 }
 
 const styles = {
@@ -38,6 +44,7 @@ const styles = {
         height: '50px',
         display: 'flex',
         flexDirection: 'row',
+        borderTop: '1px solid black'
     },
     tabActiveStyle: {
         background: '#C00000',
@@ -48,7 +55,7 @@ const styles = {
         alignItems: 'center'
     },
     tabInactiveStyle: {
-        background: '#fff',
+        background: 'rgb(45, 45, 45)',
         height: '100%',
         flex: 1,
         display: 'flex',
@@ -57,8 +64,7 @@ const styles = {
     },
     iconStyle: {
         width: '30px',
-        height: '30px',
-        color: 'blue'
+        height: '30px'
     }
 }
 
