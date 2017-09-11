@@ -1,13 +1,21 @@
 import React, {Component} from 'react';
+import Page from '../components/Page';
+import HeaderBar from '../components/HeaderBar';
+import PageContent from '../components/PageContent';
 
 class MainSettings extends Component {
     render() {
         const {containerStyle} = styles;
         
         return (
-            <div style={containerStyle}>
-                <span>Main Settings</span>
-            </div>
+            <Page>
+                <HeaderBar />
+                <PageContent>
+                    <div style={containerStyle}>
+                        <span>Main Settings</span>
+                    </div>
+                </PageContent>
+            </Page>
         );
     }
 }
