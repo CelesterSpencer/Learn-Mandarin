@@ -1,15 +1,28 @@
 import React, {Component} from 'react';
 import Page from '../components/Page';
 import HeaderBar from '../components/HeaderBar';
+import ButtonComp from '../components/ButtonComp';
+import MenuWidget from '../components/MenuWidget';
 import PageContent from '../components/PageContent';
+import backArrowIcon from '../res/images/backarrow.svg';
 
 class MainSettings extends Component {
     render() {
-        const {containerStyle} = styles;
-        
+        const {containerStyle, menuBarWidgetStyle} = styles;
+
         return (
             <Page>
-                <HeaderBar />
+                <HeaderBar>
+                    <div style={menuBarWidgetStyle}>
+                        <ButtonComp onClick={function(){ console.log('back'); }}>
+                            <img alt="" src={backArrowIcon} />
+                        </ButtonComp>
+                    </div>
+                    <MenuWidget 
+                        items={['Option A', 'Option B']}
+                        onSelect={function(item,i){ console.log(item); }}
+                    /> 
+                </HeaderBar>
                 <PageContent>
                     <div style={containerStyle}>
                         <span>Main Settings</span>
@@ -28,6 +41,11 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    menuBarWidgetStyle: {
+        width: 'auto',
+        height: '50px',
+        display: 'flex'
     }
 }
 

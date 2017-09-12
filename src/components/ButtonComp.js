@@ -21,24 +21,26 @@ class ButtonComp extends Component {
 
 const styles = {
     buttonStyle: {
-        width: '100%',
+        width: 'auto',
         color: 'white',
-        background: 'steelblue',
+        background: '#C00000',
         border: 'none',
-        padding: '10px',
+        padding: '5px',
         fontWeight: 'bold',
+        display: 'flex',
 
         ':hover': {
-            background: 'rgb(28, 60, 87)'
+            background: 'rgb(126, 4, 4)'
         }
     },
     buttonDisabledStyle: {
-        width: '100%',
+        width: 'auto',
         color: 'white',
         background: 'gray',
         border: 'none',
-        padding: '10px',
+        padding: '5px',
         fontWeight: 'bold',
+        display: 'flex',
 
         ':hover': {
             background: 'gray'
