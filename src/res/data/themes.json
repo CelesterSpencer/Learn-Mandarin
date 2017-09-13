@@ -1,4 +1,13 @@
 {
+    "app": {
+        "background": "",
+        "headerbar-background": "",
+        "headerbar-color": "",
+        "widget-background": "",
+        "widget:active-background": "",
+        "tab-background": "",
+        "tab:active-background": ""
+    },
     "cards": {
         "default": {
             "fill": true,

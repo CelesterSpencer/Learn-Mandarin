@@ -1,0 +1,75 @@
+{
+    "name": "Test Course",
+    "id": "#thisissomefakeid123",
+    "isComplete": false,
+    "lectures": [
+        {
+            "id": "#LectureA", 
+            "type": "HanziToTranslation",
+            "isTimemode": false
+        },
+        {
+            "id": "#LectureB", 
+            "type": "HanziToTranslation",
+            "isTimemode": true
+        },
+        {
+            "id": "#LectureC", 
+            "type": "WriteHanzi",
+            "isTimemode": false
+        }
+    ],
+    "blocks": [
+        {
+            "isUnlocked": true,
+            "isCompleted": false,
+            "completionDate": null,
+            "cards": [
+                "#cardid1",
+                "#cardid2",
+                "#cardid3",
+                "#cardid4",
+                "#cardid5"
+            ],
+            "lectures": [
+                { "id": "#LectureA", "isCompleted": true, "completionDate": "17:30 20/01/1990", "score": 10 },
+                { "id": "#LectureB", "isCompleted": false, "completionDate": null, "score": null },
+                { "id": "#LectureC", "isCompleted": false, "completionDate": null, "score": null }
+            ]
+        },
+        {
+            "isUnlocked": false,
+            "isCompleted": false,
+            "completionDate": null,
+            "cards": [
+                "#cardid6",
+                "#cardid7",
+                "#cardid8",
+                "#cardid9",
+                "#cardid10"
+            ],
+            "lectures": [
+                { "id": "#LectureA", "isCompleted": false, "completionDate": null, "score": null },
+                { "id": "#LectureB", "isCompleted": false, "completionDate": null, "score": null },
+                { "id": "#LectureC", "isCompleted": false, "completionDate": null, "score": null }
+            ]
+        },
+        {
+            "isUnlocked": false,
+            "isCompleted": false,
+            "completionDate": null,
+            "cards": [
+                "#cardid11",
+                "#cardid12",
+                "#cardid13",
+                "#cardid14",
+                "#cardid15"
+            ],
+            "lectures": [
+                { "id": "#LectureA", "isCompleted": false, "completionDate": null, "score": null },
+                { "id": "#LectureB", "isCompleted": false, "completionDate": null, "score": null },
+                { "id": "#LectureC", "isCompleted": false, "completionDate": null, "score": null }
+            ]
+        }
+    ]
+}
