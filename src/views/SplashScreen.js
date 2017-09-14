@@ -15,7 +15,7 @@ class SplashScreen extends Component {
     }
     componentDidMount() {
         let history = this.props.history;
-        const changeView = function() { history.replace('views'); };
+        const changeView = function() { history.replace('main'); };
         setTimeout(changeView, 6000);
     }
 }

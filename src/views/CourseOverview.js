@@ -1,13 +1,22 @@
 import React, {Component} from 'react';
+import Radium from 'radium';
+import {withRouter} from 'react-router-dom';
 import Page from '../components/Page';
+import PageContent from '../components/PageContent';
 import HeaderBar from '../components/HeaderBar';
 import ButtonComp from '../components/ButtonComp';
 import MenuWidget from '../components/MenuWidget';
-import PageContent from '../components/PageContent';
+import ListComp from '../components/ListComp';
 import backArrowIcon from '../res/images/backarrow.svg';
 import addIcon from '../res/images/add.svg';
 
+@Radium
 class CourseOverview extends Component {
+    onListItemClick(item, i) {
+        console.log(item);
+        this.props.history.push({pathname: '/views/course-details'});
+    }
+
     renderEmpty(shouldRender) {
         const {containerStyle} = styles;
 
@@ -19,14 +28,34 @@ class CourseOverview extends Component {
             );  
         }
     }
+    renderListItem(item, i) {
+        const {listItemEven, listItemOdd, bigTextStyle} = styles;
+        const itemStyle = (i % 2 === 0) ? listItemEven : listItemOdd;
+
+        const courseName     = item.name;
+        const finishedBlocks = item.finishedBlocks;
+        const totalBlocks    = item.totalBlocks;
+
+        return (
+            <div style={itemStyle} onClick={this.onListItemClick.bind(this, item, i)}>
+                <div style={bigTextStyle}>{courseName}</div>
+                <div>{finishedBlocks + '/' + totalBlocks}</div>
+            </div>
+        );
+    }
     render() {
         const {
-            menuBarWidgetStyle, 
-            listItemEven, 
-            listItemOdd, 
-            bigTextStyle,
+            menuBarWidgetStyle,
             addItemButtonStyle
         } = styles;
+
+        const items = [
+            {name: 'Course 1',    finishedBlocks: 2, totalBlocks: 10},
+            {name: 'Course 2',    finishedBlocks: 0, totalBlocks: 20},
+            {name: 'HSK 4',       finishedBlocks: 0, totalBlocks: 50},
+            {name: 'Test',        finishedBlocks: 0, totalBlocks: 20},
+            {name: 'Write Hanzi', finishedBlocks: 0, totalBlocks: 30}
+        ]
 
         return (
             <Page>
@@ -42,20 +71,10 @@ class CourseOverview extends Component {
                     /> 
                 </HeaderBar>
                 <PageContent>
-                    <div>
-                        <div style={listItemOdd}>
-                            <div style={bigTextStyle}>Course 1</div>
-                            <div>2/10</div>
-                        </div>
-                        <div style={listItemEven}>
-                            <div style={bigTextStyle}>Course 2</div>
-                            <div>0/20</div>
-                        </div>
-                        <div style={listItemOdd}>
-                            <div style={bigTextStyle}>Course 3</div>
-                            <div>10/10</div>
-                        </div>
-                    </div>
+                    <ListComp
+                        items={items}
+                        renderItem={this.renderListItem.bind(this)}
+                    />
                     <button style={addItemButtonStyle}><img src={addIcon} alt="" /></button>
                     {this.renderEmpty(false)}
                 </PageContent>
@@ -81,20 +100,22 @@ const styles = {
     listItemEven: {
         padding: '5px',
         paddingLeft: '10px',
-        background: 'gray',
+        background: 'white',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily: 'Verdana'
     },
     listItemOdd: {
         padding: '5px',
         paddingLeft: '10px',
-        background: 'rgb(144, 144, 144)',
+        background: '#ececec',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontFamily: 'Verdana'
     },
     bigTextStyle: {
         fontSize: '1.5em',
@@ -109,8 +130,13 @@ const styles = {
         borderRadius: '100%',
         background: '#C00000',
         border: 'none',
-        boxShadow: '0px 2px 5px black'
+        boxShadow: '0px 2px 5px black',
+
+        ':active': {
+            transform: 'translate(0px, 2px)',
+            boxShadow: '0px 1px 2px black'
+        }
     }
 }
 
-export default CourseOverview;
+export default withRouter(CourseOverview);

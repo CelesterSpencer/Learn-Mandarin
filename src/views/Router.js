@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import PhoneMockup from '../components/PhoneMockup';
 import SplashScreen from './SplashScreen';
 import MainView from './MainView';
+import CourseDetails from './CourseDetails';
 
 class Router extends Component {
     render() {
@@ -11,7 +12,8 @@ class Router extends Component {
                 <PhoneMockup>
                     <Switch>
                         <Route path="/" exact component={SplashScreen} />
-                        <Route path="/views" component={MainView} />
+                        <Route path="/main" component={MainView} />
+                        <Route path="/views/course-details" component={CourseDetails} />
                     </Switch>
                 </PhoneMockup>
             </BrowserRouter>

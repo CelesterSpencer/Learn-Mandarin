@@ -10,7 +10,7 @@ import settingsIcon from '../res/images/settings.svg';
 
 class MainView extends Component {
     handleTabChange(tabLabel, tabIdx) {
-        this.props.history.push({pathname: '/views'+tabLabel});
+        this.props.history.push({pathname: '/main'+tabLabel});
     }
     render() {
         const {pageContainerStyle, mainviewContentStyle} = styles;
@@ -19,9 +19,9 @@ class MainView extends Component {
             <div style={pageContainerStyle}>
                 <div style={mainviewContentStyle}>
                     <Switch>
-                        <Route path="/views/course-overview" component={CourseOverview} />
-                        <Route path="/views/deck-overview" component={DeckOverview} />
-                        <Route path="/views/main-settings" component={MainSettings} />
+                        <Route path="/main/course-overview" component={CourseOverview} />
+                        <Route path="/main/deck-overview" component={DeckOverview} />
+                        <Route path="/main/main-settings" component={MainSettings} />
                     </Switch>
                 </div>
                 <TabBar
