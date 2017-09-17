@@ -4,14 +4,180 @@ import Page from '../components/Page';
 import PageContent from '../components/PageContent';
 import HeaderBar from '../components/HeaderBar';
 import ButtonComp from '../components/ButtonComp';
+import ListComp from '../components/ListComp';
 import backArrowIcon from '../res/images/backarrow.svg';
+import lectureIcon from '../res/images/cards.svg';
+import tickIcon from '../res/images/tick.svg';
+
+const course = {
+    isCompleted: true,
+    completionDate: null,
+    blocks: [
+        {
+            isUnlocked: true,
+            isCompleted: true,
+            completionDate: 'Wed, 9 Jun 2010 22:20:00 UTC',
+            lectures: [
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                }
+            ]
+        },
+        {
+            isUnlocked: true,
+            isCompleted: true,
+            completionDate: null,
+            lectures: [
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                }
+            ]
+        },
+        {
+            isUnlocked: false,
+            isCompleted: false,
+            completionDate: null,
+            lectures: [
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: true,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                }
+            ]
+        },
+        {
+            isUnlocked: false,
+            isCompleted: false,
+            completionDate: null,
+            lectures: [
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                },
+                {
+                    isCompleted: false,
+                    icon: lectureIcon
+                }
+            ]
+        }
+    ]
+}
 
 class DeckDetails extends Component {
     onBackPress() {
         this.props.history.goBack();
     }
+
+    renderTickIcon(shouldRender) {
+        if(shouldRender) {
+            const {tickIconStyle} = styles;
+
+            return(
+                <img style={tickIconStyle} alt="" src={tickIcon}/>
+            );
+        }
+    }
+    renderLecture(lecture) {
+        const {lectureIconStyle, lectureContainerStyle} = styles;
+        const {icon, isCompleted} = lecture;
+        
+        return (
+            <div style={lectureContainerStyle}>
+                {this.renderTickIcon(isCompleted)}
+                <img style={lectureIconStyle} alt="" src={icon} />
+            </div>
+        );
+    }
+
+    renderBlock(block, i) {
+        const {
+            blockStyle, 
+            blockTitleStyle,
+            lectureRowStyle
+        } = styles;
+        const {lectures, isUnlocked, isCompleted} = block;
+        const name = 'Block ' + i;
+
+        let lectureComps = [];
+        for(var l = 0; l < lectures.length/2; l++) {
+            lectureComps.push(
+                <div style={lectureRowStyle}>
+                    {this.renderLecture(lectures[l*2])}
+                    {this.renderLecture(lectures[l*2+1])}
+                </div>
+            );
+        }
+        if(lectures.length % 2 === 1) {
+            lectureComps.push(
+                <div style={lectureRowStyle}>
+                    {this.renderLecture(lectures[lectures.length - 1])}
+                </div>
+            )
+        }
+
+        return (
+            <div>
+                <span style={blockTitleStyle}>
+                    {name}
+                    {this.renderTickIcon(isCompleted)}
+                </span>
+                <div style={blockStyle}>
+                    {lectureComps}
+                </div>
+            </div>
+        );
+    }
+
     render() {
-        const {menuBarWidgetStyle} = styles;
+        const {
+            menuBarWidgetStyle,
+            containerStyle
+        } = styles;
 
         return (
             <Page>
@@ -22,8 +188,11 @@ class DeckDetails extends Component {
                         </ButtonComp>
                     </div>
                 </HeaderBar>
-                <PageContent>
-                    Deck Details
+                <PageContent style={containerStyle}>
+                    <ListComp
+                        items={course.blocks}
+                        renderItem={this.renderBlock.bind(this)}
+                    />
                 </PageContent>
             </Page>
         );
@@ -31,10 +200,56 @@ class DeckDetails extends Component {
 }
 
 const styles = {
+    containerStyle: {
+        overflowY: 'scroll'
+    },
     menuBarWidgetStyle: {
         width: 'auto',
         height: '50px',
         display: 'flex'
+    },
+    blockStyle: {
+        padding: '10px',
+        marginBottom: '3px',
+        borderTop: '1px solid white'
+    },
+    blockTitleStyle: {
+        padding: '5px',
+        marginTop: '5px',
+        marginLeft: '5px',
+        marginRight: '5px',
+        background: 'white',
+        borderTopRightRadius: '5px',
+        borderTopLeftRadius: '5px',
+        display: 'inline-block',
+        position: 'relative'
+    },
+    lectureRowStyle: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center'
+    },
+    lectureContainerStyle: {
+        width: '100px',
+        height: '100px',
+        margin: '5px',
+        position: 'relative',
+        background: 'white',
+        borderRadius: '5px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    lectureIconStyle: {
+        width: '50px',
+        height: '50px'
+    },
+    tickIconStyle: {
+        width: '30px',
+        height: '30px',
+        position: 'absolute',
+        left: '-5px',
+        top: '-5px'
     }
 }
 
