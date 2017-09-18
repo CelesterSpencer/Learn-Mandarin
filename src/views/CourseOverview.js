@@ -7,8 +7,8 @@ import HeaderBar from '../components/HeaderBar';
 import ButtonComp from '../components/ButtonComp';
 import MenuWidget from '../components/MenuWidget';
 import ListComp from '../components/ListComp';
+import AddButton from '../containers/AddButton';
 import backArrowIcon from '../res/images/backarrow.svg';
-import addIcon from '../res/images/add.svg';
 
 @Radium
 class CourseOverview extends Component {
@@ -45,8 +45,7 @@ class CourseOverview extends Component {
     }
     render() {
         const {
-            menuBarWidgetStyle,
-            addItemButtonStyle
+            menuBarWidgetStyle
         } = styles;
 
         const items = [
@@ -75,7 +74,7 @@ class CourseOverview extends Component {
                         items={items}
                         renderItem={this.renderListItem.bind(this)}
                     />
-                    <button style={addItemButtonStyle}><img src={addIcon} alt="" /></button>
+                    <AddButton onPress={() => console.log('Add Course')} />
                     {this.renderEmpty(false)}
                 </PageContent>
             </Page>
@@ -120,22 +119,6 @@ const styles = {
     bigTextStyle: {
         fontSize: '1.5em',
         fontWeight: 'bold'
-    },
-    addItemButtonStyle: {
-        display: 'flex',
-        position: 'absolute',
-        right: '10px',
-        bottom: '10px',
-        padding: '20px',
-        borderRadius: '100%',
-        background: '#C00000',
-        border: 'none',
-        boxShadow: '0px 2px 5px black',
-
-        ':active': {
-            transform: 'translate(0px, 2px)',
-            boxShadow: '0px 1px 2px black'
-        }
     }
 }
 

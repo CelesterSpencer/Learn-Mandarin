@@ -162,10 +162,10 @@ class DeckDetails extends Component {
 
         return (
             <div>
-                <span style={blockTitleStyle}>
+                <div style={blockTitleStyle}>
                     {name}
                     {this.renderTickIcon(isCompleted)}
-                </span>
+                </div>
                 <div style={blockStyle}>
                     {lectureComps}
                 </div>
@@ -211,17 +211,15 @@ const styles = {
     blockStyle: {
         padding: '10px',
         marginBottom: '3px',
-        borderTop: '1px solid white'
+        background: 'rgb(215, 15, 15)'
     },
     blockTitleStyle: {
         padding: '5px',
+        paddingLeft: '30px',
         marginTop: '5px',
-        marginLeft: '5px',
-        marginRight: '5px',
-        background: 'white',
+        background: 'rgb(255, 127, 21)',
         borderTopRightRadius: '5px',
         borderTopLeftRadius: '5px',
-        display: 'inline-block',
         position: 'relative'
     },
     lectureRowStyle: {

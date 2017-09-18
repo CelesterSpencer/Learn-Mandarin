@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 
-class ListComp extends Component {
+class CenterComp extends Component {
     render() {
         const {containerStyle} = styles;
-        const listItems = this.props.items.map((item, i) =>
-            this.props.renderItem(item, i)
-        );
 
         return (
             <div style={containerStyle}>
-                {listItems}
+                {this.props.children}
             </div>
         );
     }
@@ -17,9 +14,13 @@ class ListComp extends Component {
 
 const styles = {
     containerStyle: {
+        width: '100%',
         height: '100%',
-        overflowY: 'auto'
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 }
 
-export default ListComp;
+export default CenterComp;

@@ -4,11 +4,87 @@ import HeaderBar from '../components/HeaderBar';
 import ButtonComp from '../components/ButtonComp';
 import MenuWidget from '../components/MenuWidget';
 import PageContent from '../components/PageContent';
+import ListComp from '../components/ListComp';
+import CenterComp from '../components/CenterComp';
+import AddButton from '../containers/AddButton';
 import backArrowIcon from '../res/images/backarrow.svg';
 
+let decks = [
+    {
+        name: 'Deck 1',
+        cards: [
+            'card1',
+            'card2',
+            'card3'
+        ]
+    },
+    {
+        name: 'Deck 2',
+        cards: [
+            'card1',
+            'card2',
+            'card3',
+            'card1',
+            'card2',
+            'card3',
+            'card1',
+            'card2',
+            'card3',
+        ]
+    },
+    {
+        name: 'Deck 3',
+        cards: [
+            'card1',
+            'card2',
+            'card3',
+            'card1',
+            'card2',
+            'card3'
+        ]
+    }
+];
+
 class DeckOverview extends Component {
+    onAddButtonPress() {
+        decks.push({
+            name: 'Deck ' + Math.floor(Math.random()*100),
+            cards: []
+        });
+    }
+
+    onListItemClick(deck, i) {
+        console.log(deck);
+        this.props.history.push({pathname: '/views/deck-details'});
+    }
+
+    renderEmpty(shouldRender) {
+        if(shouldRender) {
+            return (
+                <CenterComp>
+                    Deck Overview
+                </CenterComp>
+            );
+        }
+    }
+
+    renderListItem(deck, i) {
+        const {listItemEven, listItemOdd, bigTextStyle} = styles;
+        const itemStyle = (i % 2 === 0) ? listItemEven : listItemOdd;
+
+        const deckName = deck.name;
+        const cardCount = deck.cards.length;
+
+        return (
+            <div style={itemStyle} onClick={this.onListItemClick.bind(this, deck, i)}>
+                <div style={bigTextStyle}>{deckName}</div>
+                <div>{cardCount}</div>
+            </div>
+        );
+    }
+
     render() {
-        const {containerStyle, menuBarWidgetStyle} = styles;
+        const {menuBarWidgetStyle} = styles;
 
         return (
             <Page>
@@ -24,9 +100,12 @@ class DeckOverview extends Component {
                     /> 
                 </HeaderBar>
                 <PageContent>
-                    <div style={containerStyle}>
-                        <span>Deck Overview</span>
-                    </div>
+                    <ListComp
+                        items={decks}
+                        renderItem={this.renderListItem.bind(this)}
+                    />
+                    {this.renderEmpty(decks.length === 0)}
+                    <AddButton onPress={this.onAddButtonPress.bind(this)} />
                 </PageContent>
             </Page>
         );
@@ -46,6 +125,30 @@ const styles = {
         width: 'auto',
         height: '50px',
         display: 'flex'
+    },
+    listItemEven: {
+        padding: '5px',
+        paddingLeft: '10px',
+        background: 'white',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontFamily: 'Verdana'
+    },
+    listItemOdd: {
+        padding: '5px',
+        paddingLeft: '10px',
+        background: '#ececec',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        fontFamily: 'Verdana'
+    },
+    bigTextStyle: {
+        fontSize: '1.5em',
+        fontWeight: 'bold'
     }
 }
 
