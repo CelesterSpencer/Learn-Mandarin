@@ -55,7 +55,7 @@ const styles = {
         alignItems: 'center'
     },
     tabInactiveStyle: {
-        background: 'rgb(45, 45, 45)',
+        background: '#777777',
         height: '100%',
         flex: 1,
         display: 'flex',

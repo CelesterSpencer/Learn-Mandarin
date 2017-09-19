@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import Page from '../components/Page';
-import HeaderBar from '../components/HeaderBar';
-import ButtonComp from '../components/ButtonComp';
-import MenuWidget from '../components/MenuWidget';
-import PageContent from '../components/PageContent';
-import ListComp from '../components/ListComp';
-import CenterComp from '../components/CenterComp';
-import AddButton from '../containers/AddButton';
-import backArrowIcon from '../res/images/backarrow.svg';
+import Page from '../../components/Page';
+import HeaderBar from '../../components/HeaderBar';
+import ButtonComp from '../../components/ButtonComp';
+import MenuWidget from '../../components/MenuWidget';
+import PageContent from '../../components/PageContent';
+import ListComp from '../../components/ListComp';
+import CenterComp from '../../components/CenterComp';
+import AddButton from '../../containers/AddButton';
+import backArrowIcon from '../../res/images/backarrow.svg';
 
 let decks = [
     {
@@ -69,14 +69,13 @@ class DeckOverview extends Component {
     }
 
     renderListItem(deck, i) {
-        const {listItemEven, listItemOdd, bigTextStyle} = styles;
-        const itemStyle = (i % 2 === 0) ? listItemEven : listItemOdd;
+        const {listItemStyle, bigTextStyle} = styles;
 
         const deckName = deck.name;
         const cardCount = deck.cards.length;
 
         return (
-            <div style={itemStyle} onClick={this.onListItemClick.bind(this, deck, i)}>
+            <div style={listItemStyle} onClick={this.onListItemClick.bind(this, deck, i)}>
                 <div style={bigTextStyle}>{deckName}</div>
                 <div>{cardCount}</div>
             </div>
@@ -126,20 +125,10 @@ const styles = {
         height: '50px',
         display: 'flex'
     },
-    listItemEven: {
+    listItemStyle: {
         padding: '5px',
         paddingLeft: '10px',
         background: 'white',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontFamily: 'Verdana'
-    },
-    listItemOdd: {
-        padding: '5px',
-        paddingLeft: '10px',
-        background: '#ececec',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',

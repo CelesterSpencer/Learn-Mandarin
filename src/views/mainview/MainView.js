@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {Route, Switch, withRouter} from 'react-router-dom';
-import TabBar from '../components/TabBar';
+import TabBar from '../../components/TabBar';
 import CourseOverview from './CourseOverview';
 import DeckOverview from './DeckOverview';
 import MainSettings from './MainSettings';
-import courseIcon from '../res/images/study.svg';
-import deckIcon from '../res/images/folder_side.svg';
-import settingsIcon from '../res/images/settings.svg';
+import courseIcon from '../../res/images/study.svg';
+import deckIcon from '../../res/images/folder_side.svg';
+import settingsIcon from '../../res/images/settings.svg';
 
 class MainView extends Component {
     handleTabChange(tabLabel, tabIdx) {

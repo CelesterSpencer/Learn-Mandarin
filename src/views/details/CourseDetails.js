@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
-import Page from '../components/Page';
-import PageContent from '../components/PageContent';
-import HeaderBar from '../components/HeaderBar';
-import ButtonComp from '../components/ButtonComp';
-import ListComp from '../components/ListComp';
-import backArrowIcon from '../res/images/backarrow.svg';
-import lectureIcon from '../res/images/cards.svg';
-import tickIcon from '../res/images/tick.svg';
+import Page from '../../components/Page';
+import PageContent from '../../components/PageContent';
+import HeaderBar from '../../components/HeaderBar';
+import ButtonComp from '../../components/ButtonComp';
+import ListComp from '../../components/ListComp';
+import backArrowIcon from '../../res/images/backarrow.svg';
+import lectureIcon from '../../res/images/cards.svg';
+import tickIcon from '../../res/images/tick.svg';
 
 const course = {
     isCompleted: true,

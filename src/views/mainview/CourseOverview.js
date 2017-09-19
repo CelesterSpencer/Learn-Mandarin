@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import Radium from 'radium';
 import {withRouter} from 'react-router-dom';
-import Page from '../components/Page';
-import PageContent from '../components/PageContent';
-import HeaderBar from '../components/HeaderBar';
-import ButtonComp from '../components/ButtonComp';
-import MenuWidget from '../components/MenuWidget';
-import ListComp from '../components/ListComp';
-import AddButton from '../containers/AddButton';
-import backArrowIcon from '../res/images/backarrow.svg';
+import Page from '../../components/Page';
+import PageContent from '../../components/PageContent';
+import HeaderBar from '../../components/HeaderBar';
+import ButtonComp from '../../components/ButtonComp';
+import MenuWidget from '../../components/MenuWidget';
+import ListComp from '../../components/ListComp';
+import AddButton from '../../containers/AddButton';
+import backArrowIcon from '../../res/images/backarrow.svg';
 
 @Radium
 class CourseOverview extends Component {
@@ -29,15 +29,14 @@ class CourseOverview extends Component {
         }
     }
     renderListItem(item, i) {
-        const {listItemEven, listItemOdd, bigTextStyle} = styles;
-        const itemStyle = (i % 2 === 0) ? listItemEven : listItemOdd;
+        const {listItemStyle, bigTextStyle} = styles;
 
         const courseName     = item.name;
         const finishedBlocks = item.finishedBlocks;
         const totalBlocks    = item.totalBlocks;
 
         return (
-            <div style={itemStyle} onClick={this.onListItemClick.bind(this, item, i)}>
+            <div style={listItemStyle} onClick={this.onListItemClick.bind(this, item, i)}>
                 <div style={bigTextStyle}>{courseName}</div>
                 <div>{finishedBlocks + '/' + totalBlocks}</div>
             </div>
@@ -96,20 +95,10 @@ const styles = {
         height: '50px',
         display: 'flex'
     },
-    listItemEven: {
+    listItemStyle: {
         padding: '5px',
         paddingLeft: '10px',
         background: 'white',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        fontFamily: 'Verdana'
-    },
-    listItemOdd: {
-        padding: '5px',
-        paddingLeft: '10px',
-        background: '#ececec',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',

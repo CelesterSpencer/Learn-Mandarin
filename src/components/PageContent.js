@@ -15,7 +15,7 @@ class PageContent extends Component {
 const styles = {
     pageContentStyle: {
         height: 'calc(100% - 50px)',
-        background: '#3b3b3b',
+        background: '#cfcfcf',
         position: 'relative'
     }
 }
