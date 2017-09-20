@@ -16,7 +16,6 @@ class Toggle extends Component {
         const {
             containerOnStyle,
             containerOffStyle,
-            toggleStyle,
             sliderOnStyle,
             sliderOffStyle
         } = styles;

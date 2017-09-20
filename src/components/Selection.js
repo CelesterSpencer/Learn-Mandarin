@@ -37,7 +37,6 @@ class Selection extends Component {
 
 const styles = {
     selectStyle: {
-        background: '#cdcdcd',
         background: 'white',
         border: 'none',
         appearance: 'none',

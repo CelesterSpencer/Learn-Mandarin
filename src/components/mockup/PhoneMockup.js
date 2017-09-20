@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class PhoneMockup extends Component {
     render(props) {
         const {
-            outerContainerStyle,
             phoneCaseStyle, 
             stripeStyle,
             screenStyle,
@@ -11,28 +10,18 @@ class PhoneMockup extends Component {
         } = styles;
 
         return (
-            <div style={outerContainerStyle}>
-                <div style={phoneCaseStyle}>
-                    <div style={stripeStyle} />
-                    <div style={screenStyle}>
-                        {this.props.children}
-                    </div>
-                    <div style={buttonStyle} />
+            <div style={phoneCaseStyle}>
+                <div style={stripeStyle} />
+                <div style={screenStyle}>
+                    {this.props.children}
                 </div>
+                <div style={buttonStyle} />
             </div>
         )
     }
 }
 
 const styles = {
-    outerContainerStyle: {
-        width: '100%',
-        height: '100%',
-        background: 'linear-gradient(pink, purple)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     phoneCaseStyle: {
         width: 400*1+'px',
         height: 767*1+'px',
