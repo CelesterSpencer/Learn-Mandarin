@@ -4,6 +4,7 @@ import Mockup from '../components/mockup/Mockup';
 import SplashScreen from './SplashScreen';
 import MainView from './mainview/MainView';
 import CourseDetails from './details/CourseDetails';
+import CreateDeck from './details/CreateDeck';
 
 class Router extends Component {
     render() {
@@ -14,6 +15,7 @@ class Router extends Component {
                         <Route path="/" exact component={SplashScreen} />
                         <Route path="/main" component={MainView} />
                         <Route path="/views/course-details" component={CourseDetails} />
+                        <Route path="/views/create-deck" component={CreateDeck} />
                     </Switch>
                 </Mockup>
             </BrowserRouter>

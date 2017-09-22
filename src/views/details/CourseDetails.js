@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import {withRouter} from 'react-router-dom';
 import Page from '../../components/Page';
 import PageContent from '../../components/PageContent';
 import HeaderBar from '../../components/HeaderBar';
-import ButtonComp from '../../components/ButtonComp';
+import BackButton from '../../containers/BackButton';
 import ListComp from '../../components/ListComp';
-import backArrowIcon from '../../res/images/backarrow.svg';
 import lectureIcon from '../../res/images/cards.svg';
 import tickIcon from '../../res/images/tick.svg';
 
@@ -175,18 +173,13 @@ class DeckDetails extends Component {
 
     render() {
         const {
-            menuBarWidgetStyle,
             containerStyle
         } = styles;
 
         return (
             <Page>
                 <HeaderBar>
-                    <div style={menuBarWidgetStyle}>
-                        <ButtonComp onClick={this.onBackPress.bind(this)}>
-                            <img alt="" src={backArrowIcon} />
-                        </ButtonComp>
-                    </div>
+                    <BackButton />
                 </HeaderBar>
                 <PageContent style={containerStyle}>
                     <ListComp
@@ -202,11 +195,6 @@ class DeckDetails extends Component {
 const styles = {
     containerStyle: {
         overflowY: 'scroll'
-    },
-    menuBarWidgetStyle: {
-        width: 'auto',
-        height: '50px',
-        display: 'flex'
     },
     blockStyle: {
         padding: '10px',
@@ -251,4 +239,4 @@ const styles = {
     }
 }
 
-export default withRouter(DeckDetails);
+export default DeckDetails;

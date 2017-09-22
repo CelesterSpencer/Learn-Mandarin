@@ -12,7 +12,7 @@ class ListComp extends Component {
 
             listItems.push(this.props.renderItem(item, i));
             if(i < itemsCount-1) {
-                listItems.push(<Divider />);
+                listItems.push(<Divider key={'divider'+i} />);
             }
         }
 

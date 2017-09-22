@@ -6,9 +6,26 @@ class HeaderBar extends Component {
         const {
             containerStyle,
             widgetContainerStyle,
+            headerBarItemStyle,
             appInfoStyle,
             iconBigStyle
         } = styles;
+
+        let headerBarItems = [];
+        const children = this.props.children;
+        if(children && children.map) {
+            headerBarItems = children.map((item, i) =>
+                <div key={'headerBarItem' + i} style={headerBarItemStyle}>
+                    {item}
+                </div>
+            );
+        } else if (children) {
+            headerBarItems = [
+                <div key={'headerBarItem0'} style={headerBarItemStyle}>
+                    {children}
+                </div>
+            ];
+        }
 
         return (
             <div style={containerStyle}>
@@ -17,7 +34,7 @@ class HeaderBar extends Component {
                     <span>Learn Mandarin</span>
                 </span>
                 <div style={widgetContainerStyle}>
-                    {this.props.children}
+                    {headerBarItems}
                 </div>
             </div>
         )
@@ -42,6 +59,11 @@ const styles = {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    headerBarItemStyle: {
+        width: 'auto',
+        height: '50px',
+        display: 'flex'
     },
     appInfoStyle: {
         verticalAlign: 'middle',

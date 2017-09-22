@@ -1,13 +1,12 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import Page from '../../components/Page';
 import HeaderBar from '../../components/HeaderBar';
-import ButtonComp from '../../components/ButtonComp';
 import MenuWidget from '../../components/MenuWidget';
 import PageContent from '../../components/PageContent';
 import ListComp from '../../components/ListComp';
 import CenterComp from '../../components/CenterComp';
 import AddButton from '../../containers/AddButton';
-import backArrowIcon from '../../res/images/backarrow.svg';
 
 let decks = [
     {
@@ -47,14 +46,10 @@ let decks = [
 
 class DeckOverview extends Component {
     onAddButtonPress() {
-        decks.push({
-            name: 'Deck ' + Math.floor(Math.random()*100),
-            cards: []
-        });
+        this.props.history.push({pathname: '/views/create-deck'});
     }
 
     onListItemClick(deck, i) {
-        console.log(deck);
         this.props.history.push({pathname: '/views/deck-details'});
     }
 
@@ -83,16 +78,9 @@ class DeckOverview extends Component {
     }
 
     render() {
-        const {menuBarWidgetStyle} = styles;
-
         return (
             <Page>
                 <HeaderBar>
-                    <div style={menuBarWidgetStyle}>
-                        <ButtonComp onClick={function(){ console.log('back'); }}>
-                            <img alt="" src={backArrowIcon} />
-                        </ButtonComp>
-                    </div>
                     <MenuWidget 
                         items={['Option A', 'Option B']}
                         onSelect={function(item,i){ console.log(item); }}
@@ -120,11 +108,6 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center'
     },
-    menuBarWidgetStyle: {
-        width: 'auto',
-        height: '50px',
-        display: 'flex'
-    },
     listItemStyle: {
         padding: '5px',
         paddingLeft: '10px',
@@ -141,4 +124,4 @@ const styles = {
     }
 }
 
-export default DeckOverview;
+export default withRouter(DeckOverview);

@@ -4,11 +4,9 @@ import {withRouter} from 'react-router-dom';
 import Page from '../../components/Page';
 import PageContent from '../../components/PageContent';
 import HeaderBar from '../../components/HeaderBar';
-import ButtonComp from '../../components/ButtonComp';
 import MenuWidget from '../../components/MenuWidget';
 import ListComp from '../../components/ListComp';
 import AddButton from '../../containers/AddButton';
-import backArrowIcon from '../../res/images/backarrow.svg';
 
 @Radium
 class CourseOverview extends Component {
@@ -36,16 +34,13 @@ class CourseOverview extends Component {
         const totalBlocks    = item.totalBlocks;
 
         return (
-            <div style={listItemStyle} onClick={this.onListItemClick.bind(this, item, i)}>
+            <div key={'listItem'+i} style={listItemStyle} onClick={this.onListItemClick.bind(this, item, i)}>
                 <div style={bigTextStyle}>{courseName}</div>
                 <div>{finishedBlocks + '/' + totalBlocks}</div>
             </div>
         );
     }
     render() {
-        const {
-            menuBarWidgetStyle
-        } = styles;
 
         const items = [
             {name: 'Course 1',    finishedBlocks: 2, totalBlocks: 10},
@@ -58,11 +53,6 @@ class CourseOverview extends Component {
         return (
             <Page>
                 <HeaderBar>
-                    <div style={menuBarWidgetStyle}>
-                        <ButtonComp onClick={function(){ console.log('back'); }}>
-                            <img alt="" src={backArrowIcon} />
-                        </ButtonComp>
-                    </div>
                     <MenuWidget 
                         items={['Option A', 'Option B']}
                         onSelect={function(item,i){ console.log(item); }}
@@ -89,11 +79,6 @@ const styles = {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    menuBarWidgetStyle: {
-        width: 'auto',
-        height: '50px',
-        display: 'flex'
     },
     listItemStyle: {
         padding: '5px',
