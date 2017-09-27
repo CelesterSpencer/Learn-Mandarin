@@ -12,7 +12,7 @@ class PhoneMockup extends Component {
         return (
             <div style={phoneCaseStyle}>
                 <div style={stripeStyle} />
-                <div style={screenStyle}>
+                <div style={screenStyle} id="screen">
                     {this.props.children}
                 </div>
                 <div style={buttonStyle} />

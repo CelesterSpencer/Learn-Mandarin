@@ -25,7 +25,7 @@ class TabletMockup extends Component {
         return (
             <div style={phoneCase}>
                 <div style={stripe} />
-                <div style={screen}>
+                <div style={screen} id="screen">
                     {this.props.children}
                 </div>
                 <div style={button}>

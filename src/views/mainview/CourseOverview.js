@@ -10,6 +10,10 @@ import AddButton from '../../containers/AddButton';
 
 @Radium
 class CourseOverview extends Component {
+    handlePress() {
+        this.props.history.push({pathname: '/views/create-course'});
+    }
+
     onListItemClick(item, i) {
         console.log(item);
         this.props.history.push({pathname: '/views/course-details'});
@@ -63,7 +67,7 @@ class CourseOverview extends Component {
                         items={items}
                         renderItem={this.renderListItem.bind(this)}
                     />
-                    <AddButton onPress={() => console.log('Add Course')} />
+                    <AddButton onPress={this.handlePress.bind(this)} />
                     {this.renderEmpty(false)}
                 </PageContent>
             </Page>

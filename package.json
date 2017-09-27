@@ -5,6 +5,7 @@
   "dependencies": {
     "custom-react-scripts": "0.2.0",
     "hanzi-writer": "^0.2.0",
+    "nuka-carousel": "^2.3.0",
     "radium": "^0.19.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

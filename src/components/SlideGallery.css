@@ -1,0 +1,10 @@
+.slider-frame,
+.slider-list,
+.slider-slide {
+    height: 100% !important;
+}
+
+.slider-decorator-0,
+.slider-decorator-1 {
+    visibility: hidden !important;
+}
