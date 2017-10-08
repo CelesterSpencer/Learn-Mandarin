@@ -10,6 +10,7 @@ import settingsIcon from '../../res/images/settings.svg';
 
 class MainView extends Component {
     handleTabChange(tabLabel, tabIdx) {
+        console.log('select ' + tabLabel);
         this.props.history.push({pathname: '/main'+tabLabel});
     }
     render() {

@@ -4,7 +4,12 @@ import ButtonComp from '../components/ButtonComp';
 import backArrowIcon from '../res/images/backarrow.svg';
 
 class BackButton extends Component {
+    static defaultProps = {
+        onPress: () => {}
+    }
+
     onBackPress() {
+        this.props.onPress();
         this.props.history.goBack();
     }
 

@@ -4,6 +4,11 @@ import WidgetIcon from '../res/images/plus.svg';
 
 @Radium
 class MenuWidget extends Component {
+    static defaultProps = {
+        onSelect: () => {},
+        items: []
+    }
+
     constructor() {
         super();
         this.state = {
@@ -16,7 +21,7 @@ class MenuWidget extends Component {
     }
     handleSelect(item, i) {
         this.setState({menuOpen: !this.state.menuOpen});
-        if(this.props.onSelect) this.props.onSelect(item, i);
+        this.props.onSelect(item, i);
     }
 
     renderMenu(shouldRender) {

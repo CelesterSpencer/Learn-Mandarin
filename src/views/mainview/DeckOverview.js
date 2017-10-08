@@ -1,76 +1,40 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import Page from '../../components/Page';
 import HeaderBar from '../../components/HeaderBar';
-import MenuWidget from '../../components/MenuWidget';
 import PageContent from '../../components/PageContent';
 import ListComp from '../../components/ListComp';
 import CenterComp from '../../components/CenterComp';
 import AddButton from '../../containers/AddButton';
-
-let decks = [
-    {
-        name: 'Deck 1',
-        cards: [
-            'card1',
-            'card2',
-            'card3'
-        ]
-    },
-    {
-        name: 'Deck 2',
-        cards: [
-            'card1',
-            'card2',
-            'card3',
-            'card1',
-            'card2',
-            'card3',
-            'card1',
-            'card2',
-            'card3',
-        ]
-    },
-    {
-        name: 'Deck 3',
-        cards: [
-            'card1',
-            'card2',
-            'card3',
-            'card1',
-            'card2',
-            'card3'
-        ]
-    }
-];
+import {setActiveDeck} from '../../actions';
 
 class DeckOverview extends Component {
-    onAddButtonPress() {
+    onAddButtonPress = () => {
         this.props.history.push({pathname: '/views/create-deck'});
     }
 
-    onListItemClick(deck, i) {
+    onItemPress(deck, i) {
+        this.props.setActiveDeck(deck);
         this.props.history.push({pathname: '/views/deck-details'});
     }
 
-    renderEmpty(shouldRender) {
-        if(shouldRender) {
-            return (
-                <CenterComp>
-                    Deck Overview
-                </CenterComp>
-            );
-        }
+    renderEmpty = () => {
+        return (
+            <CenterComp>
+                Add new Decks
+            </CenterComp>
+        );
     }
 
-    renderListItem(deck, i) {
+    renderItem = (deck, i) => {
         const {listItemStyle, bigTextStyle} = styles;
 
         const deckName = deck.name;
         const cardCount = deck.cards.length;
 
         return (
-            <div style={listItemStyle} onClick={this.onListItemClick.bind(this, deck, i)}>
+            <div style={listItemStyle} onClick={this.onItemPress.bind(this, deck, i)}>
                 <div style={bigTextStyle}>{deckName}</div>
                 <div>{cardCount}</div>
             </div>
@@ -78,21 +42,20 @@ class DeckOverview extends Component {
     }
 
     render() {
+        const {decks} = this.props;
+        const hasNoDecks = this.props.decks.length === 0;
+
         return (
             <Page>
                 <HeaderBar>
-                    <MenuWidget 
-                        items={['Option A', 'Option B']}
-                        onSelect={function(item,i){ console.log(item); }}
-                    /> 
                 </HeaderBar>
                 <PageContent>
                     <ListComp
                         items={decks}
-                        renderItem={this.renderListItem.bind(this)}
+                        renderItem={this.renderItem}
+                        renderEmpty={this.renderEmpty}
                     />
-                    {this.renderEmpty(decks.length === 0)}
-                    <AddButton onPress={this.onAddButtonPress.bind(this)} />
+                    <AddButton onPress={this.onAddButtonPress} />
                 </PageContent>
             </Page>
         );
@@ -124,4 +87,12 @@ const styles = {
     }
 }
 
-export default withRouter(DeckOverview);
+const mapStateToProps = state => {
+    const {decks} = state.deck;
+    console.dir(state);
+    return { decks };
+};
+
+export default withRouter(connect(mapStateToProps, {
+    setActiveDeck
+})(DeckOverview));

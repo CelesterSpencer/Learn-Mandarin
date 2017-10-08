@@ -5,7 +5,9 @@ class PageContent extends Component {
         const {pageContentStyle} = styles;
 
         return (
-            <div style={pageContentStyle} id="app-content">
+            <div 
+                style={{...pageContentStyle, ...this.props.style}} 
+                id="app-content">
                 {this.props.children}
             </div>
         );

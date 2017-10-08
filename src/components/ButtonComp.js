@@ -4,6 +4,7 @@ import Radium from 'radium';
 @Radium
 class ButtonComp extends Component {
     static defaultProps = {
+        disabled: false,
         onClick: () => {console.log('Button pressed');}
     }
 
@@ -12,7 +13,7 @@ class ButtonComp extends Component {
     }
     render() {
         const buttonStyle = {...styles.buttonStyle, ...this.props.style};
-        const {buttonDisabledStyle} = styles;
+        const buttonDisabledStyle = {...styles.buttonDisabledStyle, ...this.props.disabledStyle};
 
         const usedStyle = (this.props.disabled) ? buttonDisabledStyle : buttonStyle;
 
