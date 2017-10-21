@@ -2,15 +2,15 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import Modal from './Modal';
-import {deleteDeck} from '../../actions';
+import {deleteCard} from '../../actions';
 
 class DeleteDeck extends Component {
     onCancelPress = () => {
         this.props.history.goBack();
     }
     onDeletePress = () => {
-        this.props.deleteDeck();
-        this.props.history.push({pathname: '/main/deck-overview'});
+        this.props.deleteCard();
+        this.props.history.push({pathname: '/views/deck-details'});
     }
 
     render() {
@@ -18,12 +18,12 @@ class DeleteDeck extends Component {
             <Modal 
                 onCancelPress={this.onCancelPress}
                 onDeletePress={this.onDeletePress}
-                text='Are you sure you want to delete this deck?'
+                text='Are you sure you want to delete this card?'
             />
         );
     }
 };
 
 export default withRouter(connect(null, {
-    deleteDeck
+    deleteCard
 })(DeleteDeck));

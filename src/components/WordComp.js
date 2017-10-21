@@ -2,20 +2,35 @@ import React, {Component} from 'react';
 import CharacterComp from './CharacterComp';
 
 class WordComp extends Component {
-    render() {
-        const card = this.props.card;
-        const hideHanzi = this.props.hideHanzi || false;
-        const hidePinyin = this.props.hidePinyin || false;
+    static defaultProps = {
+        hideHanzi: false,
+        hidePinyin: false
+    }
 
+    renderCharacters() {
+        const {hanzi, pinyin, tones} = this.props.card;
+        const {hideHanzi, hidePinyin} = this.props;
+        let characterComps = [];
+        for(let i = 0; i < hanzi.length; i++) {
+            const character = { hanzi: hanzi[i], pinyin: pinyin[i], tone: tones[i] };
+            characterComps.push(
+                <CharacterComp 
+                    key={i} 
+                    character={character} 
+                    hideHanzi={hideHanzi} 
+                    hidePinyin={hidePinyin} 
+                />
+            );
+        }
+        return characterComps;
+    }
+
+    render() {        
         const {containerStyle} = styles;
 
-        const characterComps = card.characters.map((character, i) =>
-            <CharacterComp key={i} character={character} hideHanzi={hideHanzi} hidePinyin={hidePinyin} />
-        );
-
         return (
-            <div style={containerStyle}>
-                {characterComps}
+            <div style={{containerStyle, ...this.props.style}}>
+                {this.renderCharacters()}
             </div>
         );
     }
@@ -24,7 +39,7 @@ class WordComp extends Component {
 const styles = {
     containerStyle: {
         textAlign: 'center'
-    },
+    }
 };
 
 export default WordComp;

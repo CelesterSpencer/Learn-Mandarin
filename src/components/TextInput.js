@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 class TextInput extends Component {
     static defaultProps = {
         text: '',
+        isInvalid: false,
         onChange: (value) => console.log('Typed ' + value)
     }
 
@@ -12,11 +13,12 @@ class TextInput extends Component {
     
     render() {
         const {textInputStyle} = styles;
+        const borderColor = (this.props.isInvalid) ? {borderColor: 'red'} : undefined;
 
         return (
             <input 
                 type="text" 
-                style={{...textInputStyle, ...this.props.style}}
+                style={{...textInputStyle, ...this.props.style, borderColor}}
                 value={this.props.text}
                 onChange={this.onChange}
             />

@@ -13,8 +13,14 @@ const vocalMap = {
 }
 
 class Card extends Component {
+    static defaultProps = {
+        hideHanzi: false,
+        hidePinyin: false
+    }
+
     getToneColor(tone) {
-        switch(tone) {
+        const t = (tone.length) ? parseInt(tone) : tone;
+        switch(t) {
             case 1  : return cardTheme.tone1;
             case 2  : return cardTheme.tone2;
             case 3  : return cardTheme.tone3;
@@ -104,8 +110,7 @@ class Card extends Component {
 
     render() {
         const character  = this.props.character;
-        const hideHanzi  = this.props.hideHanzi  || false;
-        const hidePinyin = this.props.hidePinyin || false;
+        const {hideHanzi, hidePinyin} = this.props;
 
         const {
             characterStyle,
@@ -133,7 +138,8 @@ const styles = {
         margin: '2px'
     },
     hanziStyle: {
-        padding: '10px',
+        height: '32px',
+        padding: 'auto',
         borderTopLeftRadius: '5px',
         borderTopRightRadius: '5px',
         fontSize: 'x-large',

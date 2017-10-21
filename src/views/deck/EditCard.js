@@ -13,10 +13,11 @@ import {
     setPinyin, 
     setTranslation, 
     setHint,
-    createCard
+    editCard,
+    deleteCard
 } from '../../actions';
 
-class CreateCard extends Component {
+class EditCard extends Component {
     onChangeHanzi = (hanzi) => {
         this.props.setHanzi(hanzi);
     }
@@ -29,11 +30,16 @@ class CreateCard extends Component {
     onChangeHint = (hint) => {
         this.props.setHint(hint);
     }
-    onCreateButtonPress = () => {
+    onEditButtonPress = () => {
         const {hanzi, pinyin, translation, hint} = this.props;
         const word = parseCard(hanzi, pinyin);
-        if(word && word.hanzi.length > 0)
-            this.props.createCard(word, translation, hint);
+        if(word && word.hanzi.length > 0) {
+            this.props.editCard(word, translation, hint);
+            this.props.history.goBack();
+        }
+    }
+    onDeleteButtonPress = () => {
+        this.props.history.push({pathname: '/modal/delete-card'});
     }
 
     render() {
@@ -77,13 +83,28 @@ class CreateCard extends Component {
                     </div>
                     <ButtonComp 
                         style={buttonStyle}
-                        onClick={this.onCreateButtonPress}
+                        onClick={this.onEditButtonPress}
                         disabledStyle={buttonStyle}
                         disabled={buttonDisabled}
-                    >Create Card</ButtonComp>
+                    >Edit Card</ButtonComp>
+                    <ButtonComp 
+                        style={buttonStyle}
+                        onClick={this.onDeleteButtonPress}
+                        disabledStyle={buttonStyle}
+                        disabled={buttonDisabled}
+                    >Delete Card</ButtonComp>
                 </PageContent>
             </Page>
         );
+    }
+
+    componentWillMount() {
+        const deck = this.props.decks.find((item) => item.id === this.props.activeDeck);
+        const card = deck.cards.find((item) => item.id === this.props.activeCard);
+        this.props.setHanzi(card.hanzi.join(''));
+        this.props.setPinyin(card.pinyin.map((p, i) => p+card.tones[i]).join(' '));
+        this.props.setTranslation(card.translation);
+        this.props.setHint(card.hint);
     }
 }
 
@@ -92,7 +113,7 @@ const styles = {
         padding: '10px'
     },
     scrollableContentStyle: {
-        height: 'calc(100% - 60px)',
+        height: 'calc(100% - 95px)',
         marginBottom: '10px',
         overflowY: 'auto'
     },
@@ -102,13 +123,14 @@ const styles = {
         marginTop: '10px'
     },
     buttonStyle: {
-        width: '100%'
+        width: '100%',
+        marginBottom: '5px'
     }
 }
 
 const mapStateToProps = state => {
-    const {hanzi, pinyin, translation, hint} = state.deck;
-    return {hanzi, pinyin, translation, hint};
+    const {decks, hanzi, pinyin, translation, hint, activeDeck, activeCard} = state.deck;
+    return {decks, hanzi, pinyin, translation, hint, activeDeck, activeCard};
 }
 
 export default withRouter(connect(mapStateToProps, {
@@ -116,5 +138,6 @@ export default withRouter(connect(mapStateToProps, {
     setPinyin,
     setTranslation,
     setHint,
-    createCard
-})(CreateCard));
+    editCard,
+    deleteCard
+})(EditCard));

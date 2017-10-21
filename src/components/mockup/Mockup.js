@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {withRouter} from 'react-router-dom';
 import Radium from 'radium';
 import PhoneMockup from './PhoneMockup';
 import TabletMockup from './TabletMockup';
@@ -76,6 +77,11 @@ class Mockup extends Component {
             </div>
         );
     }
+
+    componentDidMount() {
+        if(this.props.pathname)
+            this.props.history.push({pathname: this.props.pathname});
+    }
 }
 
 const styles = {
@@ -107,4 +113,4 @@ const styles = {
     }
 }
 
-export default Mockup;
+export default withRouter(Mockup);
